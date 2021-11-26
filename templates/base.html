@@ -75,8 +75,8 @@
     <!-- Alerts -->
     <input hidden name="add_item_to_cart_url" value="{% url 'cart:add_item' %}"/>
     <input hidden name="remove_item_from_cart_url" value="{% url 'cart:remove_item' %}"/>
-    <div hidden style="position: sticky; top: 60px; z-index: 6; margin-bottom: 0;" class="alert alert-success" role="alert"></div>
-    <div hidden style="position: sticky; top: 60px; z-index: 6; margin-bottom: 0;" class="alert alert-danger" role="alert"></div>
+    <div hidden style="position: sticky; top: 60px; z-index: 4; margin-bottom: 0;" class="alert alert-success" role="alert"></div>
+    <div hidden style="position: sticky; top: 60px; z-index: 4; margin-bottom: 0;" class="alert alert-danger" role="alert"></div>
 
     {% block body %}
     {% endblock body %}
