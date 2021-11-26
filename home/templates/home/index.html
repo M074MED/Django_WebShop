@@ -12,37 +12,43 @@
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active" data-bs-interval="10000">
-                <a href="{% url 'product:product_details' product1.id product1.slug %}">
-                    {% if product1.image %}
+                {% if product1.image %}
+                    <a href="{% url 'product:product_details' product1.id product1.slug %}">
                         <img src="{{product1.image.url}}" class="d-block w-100" style="height: calc(100vh - 62px);" alt="Slide Image">
-                    {% else %}
+                    </a>
+                {% else %}
+                    <a href="#">
                         <img src="{% static 'img/product_image.jpeg' %}" class="d-block w-100" style="height: calc(100vh - 62px);" alt="Slide Image">
-                    {% endif %}
-                </a>
+                    </a>
+                {% endif %}
                 <div class="carousel-caption d-none d-md-block">
                     <h5>{{product1.title}}</h5>
                 </div>
             </div>
             <div class="carousel-item" data-bs-interval="2000">
-                <a href="{% url 'product:product_details' product2.id product2.slug %}">
-                    {% if product2.image %}
+                {% if product2.image %}
+                    <a href="{% url 'product:product_details' product2.id product2.slug %}">
                         <img src="{{product2.image.url}}" class="d-block w-100" style="height: calc(100vh - 62px);" alt="Slide Image">
-                    {% else %}
+                    </a>
+                {% else %}
+                    <a href="#">
                         <img src="{% static 'img/product_image.jpeg' %}" class="d-block w-100" style="height: calc(100vh - 62px);" alt="Slide Image">
-                    {% endif %}
-                </a>
+                    </a>
+                {% endif %}
                 <div class="carousel-caption d-none d-md-block">
                     <h5>{{product2.title}}</h5>
                 </div>
             </div>
             <div class="carousel-item">
-                <a href="{% url 'product:product_details' product3.id product3.slug %}">
-                    {% if product3.image %}
+                {% if product1.image %}
+                    <a href="{% url 'product:product_details' product3.id product3.slug %}">
                         <img src="{{product3.image.url}}" class="d-block w-100" style="height: calc(100vh - 62px);" alt="Slide Image">
-                    {% else %}
+                    </a>
+                {% else %}
+                    <a href="#">
                         <img src="{% static 'img/product_image.jpeg' %}" class="d-block w-100" style="height: calc(100vh - 62px);" alt="Slide Image">
-                    {% endif %}
-                </a>
+                    </a>
+                {% endif %}
                 <div class="carousel-caption d-none d-md-block">
                     <h5>{{product3.title}}</h5>
                 </div>

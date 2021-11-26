@@ -14,9 +14,11 @@ def home(request):
         cart_items = [i.item for i in items]
 
     products = Product.objects.all()
-    product1 = products[floor(random()*products.count())]  # for the slide
-    product2 = products[floor(random()*products.count())]  # for the slide
-    product3 = products[floor(random()*products.count())]  # for the slide
+    product1, product2, product3 = '', '', ''  # for the slide
+    if products:
+        product1 = products[floor(random() * products.count())]
+        product2 = products[floor(random() * products.count())]
+        product3 = products[floor(random() * products.count())]
 
     context = {
         'products': products,
