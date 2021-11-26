@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+    <!-- Start Content -->
+    <!-- Product Details -->
+    <div class="container row mx-auto mt-5">
+        <div class="col-lg-9">
+            <div class="card">
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" class="card-img-top" alt="product_image">
+                {% else %}
+                    <img src="{% static 'img/product_image.jpeg' %}" class="card-img-top" alt="product_image">
+                {% endif %}
+                <div class="card-body">
+                    <a href="{% url 'product:product_details' product.id product.slug %}">
+                        <h3 class="card-title">{{ product.title }}</h3>
+                    </a>
+                    <hr class="dropdown-divider">
+                    <h5>Description</h5>
+                    <p class="card-text">{{ product.description }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="card">
+                <div class="card-body">
+                        <h5 class="card-title fs-3">Summary</h5>
+                    <hr class="dropdown-divider">
+                    <p class="card-text fs-5"><span class="fw-bold">Price:</span> {{ product.price }}$</p>
+                    <p class="card-text fs-5"><span class="fw-bold">Posted at:</span> {{product.posted_on|date:'j M Y'}}</p>
+                    <p class="card-text fs-5"><span class="fw-bold">Product code:</span> {{ product.product_code }}</p>
+                    <p class="card-text fs-5"><span class="fw-bold">Trader:</span> {{ product.trader }}</p>
+                    <div>
+                        {% if product in items %}
+                            <a class="btn btn-success w-100 fs-5" href="{% url 'cart:cart_details' %}">Go To Cart</a>
+                        {% else %}
+                        {% csrf_token %}
+                            <button class="btn btn-primary w-100 fs-5 add-to-cart-btn" value="{{ product.id }}">Add To Cart</button>
+                        {% endif %}
+                            <a hidden class="btn btn-success w-100 fs-5" href="{% url 'cart:cart_details' %}">Go To Cart</a>
+                    </div>
+                    <a href="#" class="btn btn-outline-primary w-100 fs-5 mt-2">Buy Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Suggested Products -->
+    <div class="container row mx-auto m-5" style="box-shadow: 2px 2px 8px 0px #ddd;">
+        <div class="col-12">
+            <div class="nav justify-content-between">
+                <h4 class="m-3 p-0">Suggested Products</h4>
+                <div class="m-3">
+                    <a class="btn btn-outline-primary" href="{% url 'product:products' %}">More Products</a>
+                </div>
+            </div>
+        </div>
+        <div class="row mx-auto">
+            {% for suggested_product in suggested_products|slice:3 %}
+            <div class="col-lg-4 col-md-6 mt-1">
+                <div class="card m-3" style="width: 90%;">
+                    <a href="{% url 'product:product_details' suggested_product.id suggested_product.slug %}">
+                    {% if suggested_product.image %}
+                        <img src="{{ suggested_product.image.url }}" class="card-img-top" style="height: 180px;" alt="product_image">
+                    {% else %}
+                        <img src="{% static 'img/product_image.jpeg' %}" class="card-img-top" style="height: 180px" alt="product_image">
+                    {% endif %}
+                    </a>
+                    <div class="card-body">
+                        <a href="{% url 'product:product_details' suggested_product.id suggested_product.slug %}">
+                            <h5 class="card-title">{{ suggested_product.title }}</h5>
+                        </a>
+                        <hr class="dropdown-divider">
+                        <p class="card-text" style="padding-bottom: 0px; margin-bottom: 0px;"><span class="fw-bold">Price:</span> {{ suggested_product.price }}$</p>
+                        <p class="card-text" style="padding-bottom: 0px; margin-bottom: 0px;"><span class="fw-bold">Product code:</span> {{ suggested_product.product_code }}</p>
+                        <p class="card-text"><span class="fw-bold">Trader:</span> {{ suggested_product.trader }}</p>
+                        {% if suggested_product in items %}
+                            <a class="btn btn-success w-100 fs-5" href="{% url 'cart:cart_details' %}">Go To Cart</a>
+                        {% else %}
+                        {% csrf_token %}
+                            <button class="btn btn-primary w-100 fs-5 add-to-cart-btn" value="{{ suggested_product.id }}">Add To Cart</button>
+                        {% endif %}
+                            <a hidden class="btn btn-success w-100 fs-5" href="{% url 'cart:cart_details' %}">Go To Cart</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <!-- End Content -->
+{% endblock body %}

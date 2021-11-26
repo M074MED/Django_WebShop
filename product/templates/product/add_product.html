@@ -1,0 +1,13 @@
+{% extends 'base_generic.html' %}
+{% load bootstrap5 %}
+
+{% block content %}
+    <h3 class="text-center m-3"> Post New Product </h3>
+    <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+        {% bootstrap_form add_product_form %}
+        {% buttons %}
+            <button class="btn btn-primary mt-3 fs-5 w-100" type="submit" name="add_product">Post Now</button>
+        {% endbuttons %}
+    </form>
+{% endblock content %}

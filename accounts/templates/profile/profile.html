@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+    <!-- Start Content -->
+    <div class="container">
+        <div class="card col-8 mx-auto m-5">
+            <div class="card-body">
+                {% if profile.image %}
+                    <img src="{{profile.image.url}}" style="border-radius: 50%; width: 35%; height: 250px;" alt="Profile picture">
+                {% else %}
+                    <img src="{% static 'img/profile_picture.png' %}" style="border-radius: 50%; width: 35%;" alt="Profile picture">
+                {% endif %}
+                <h5 class="card-title d-inline-block m-5 fs-3">{{profile.user}}</h5>
+                <hr class="dropdown-divider">
+                <p class="card-text fs-5"><span class="fw-bold">Username:</span> {{profile.user}}</p>
+                <p class="card-text fs-5"><span class="fw-bold">Full Name:</span> {{profile.user.first_name}} {{profile.user.last_name}}</p>
+                <p class="card-text fs-5"><span class="fw-bold">Email:</span> {{profile.user.email}}</p>
+                <p class="card-text fs-5"><span class="fw-bold">Phone Number:</span> {{profile.phone_number}}</p>
+                <p class="card-text fs-5"><span class="fw-bold">Password:</span> <a href="{% url 'password_change' %}" class="btn btn-primary fs-5">Change Password</a></p>
+                <p class="card-text fs-5"><span class="fw-bold">City:</span> {{profile.city}}</p>
+                <a href="{% url 'accounts:edit_profile' %}" class="btn btn-primary w-100 fs-5">Edit Profile</a>
+            </div>
+        </div>
+    </div>
+    <!-- End Content -->
+{% endblock body %}

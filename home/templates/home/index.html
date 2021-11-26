@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+    <!-- Start Content -->
+    <!-- Slide -->
+    <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active" data-bs-interval="10000">
+                <a href="{% url 'product:product_details' product1.id product1.slug %}">
+                    {% if product1.image %}
+                        <img src="{{product1.image.url}}" class="d-block w-100" style="height: calc(100vh - 62px);" alt="Slide Image">
+                    {% else %}
+                        <img src="{% static 'img/product_image.jpeg' %}" class="d-block w-100" style="height: calc(100vh - 62px);" alt="Slide Image">
+                    {% endif %}
+                </a>
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>{{product1.title}}</h5>
+                </div>
+            </div>
+            <div class="carousel-item" data-bs-interval="2000">
+                <a href="{% url 'product:product_details' product2.id product2.slug %}">
+                    {% if product2.image %}
+                        <img src="{{product2.image.url}}" class="d-block w-100" style="height: calc(100vh - 62px);" alt="Slide Image">
+                    {% else %}
+                        <img src="{% static 'img/product_image.jpeg' %}" class="d-block w-100" style="height: calc(100vh - 62px);" alt="Slide Image">
+                    {% endif %}
+                </a>
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>{{product2.title}}</h5>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <a href="{% url 'product:product_details' product3.id product3.slug %}">
+                    {% if product3.image %}
+                        <img src="{{product3.image.url}}" class="d-block w-100" style="height: calc(100vh - 62px);" alt="Slide Image">
+                    {% else %}
+                        <img src="{% static 'img/product_image.jpeg' %}" class="d-block w-100" style="height: calc(100vh - 62px);" alt="Slide Image">
+                    {% endif %}
+                </a>
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>{{product3.title}}</h5>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    
+    <!-- Products -->
+    <div class="container">
+        <div class="row mt-5">
+            {% for product in products|slice:6 %}
+            <div class="col-lg-4 col-md-6 mt-5">
+                <div class="card m-3" style="width: 90%;">
+                    <a href="{% url 'product:product_details' product.id product.slug %}">
+                        {% if product.image %}
+                        <img src="{{ product.image.url }}" class="card-img-top" style="height: 200px;" alt="Product Image">
+                        {% else %}
+                        <img src="{% static 'img/product_image.jpeg' %}" class="card-img-top" style="height: 200px;" alt="Product Image">
+                        {% endif %}
+                    </a>
+                    <div class="card-body">
+                        <a href="{% url 'product:product_details' product.id product.slug %}">
+                            <h5 class="card-title">{{product.title}}</h5>
+                        </a>
+                        <hr class="dropdown-divider">
+                        <p class="card-text" style="padding-bottom: 0px; margin-bottom: 0px;"><span class="fw-bold">Price:</span> {{ product.price }}$</p>
+                        <p class="card-text" style="padding-bottom: 0px; margin-bottom: 0px;"><span class="fw-bold">Product code:</span> {{ product.product_code }}</p>
+                        <p class="card-text"><span class="fw-bold">Trader:</span> {{ product.trader }}</p>
+                        {% if product in items %}
+                            <a class="btn btn-success w-100 fs-5" href="{% url 'cart:cart_details' %}">Go To Cart</a>
+                        {% else %}
+                        {% csrf_token %}
+                            <button class="btn btn-primary w-100 fs-5 add-to-cart-btn" value="{{ product.id }}">Add To Cart</button>
+                        {% endif %}
+                            <a hidden class="btn btn-success w-100 fs-5" href="{% url 'cart:cart_details' %}">Go To Cart</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="more-pro">
+            <a href="{% url 'product:products' %}" class="btn btn-outline-primary">More Products</a>
+        </div>
+    </div>
+    <!-- End Content -->
+{% endblock body %}

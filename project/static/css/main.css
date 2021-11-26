@@ -1,0 +1,44 @@
+/* global roles */
+a {
+  text-decoration: none;
+}
+
+/* Start Nav */
+nav {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 5;
+}
+/* Shopping Cart Counter */
+.fa-shopping-cart span {
+  background-color: #f44336;
+  font-size: 12px;
+  color: #fff;
+  padding: 2px;
+  position: relative;
+  top: -7px;
+  right: 45%;
+  float: right;
+  border-radius: 50%;
+}
+/* Profile Picture */
+nav .profile_picture {
+  border-radius: 50%;
+  width: 30px;
+}
+/* End Nav */
+
+/* Start Content */
+.card {
+  padding-left: 0;
+  padding-right: 0;
+  box-shadow: 4px 4px 7px 0px #ddd;
+}
+
+.more-pro {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 30px 0 50px;
+}
+/* End Content */
